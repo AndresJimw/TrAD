@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2025-05-04 10:06:47 by Eclipse SUMO netconvert Version 1.18.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <type-files value="input/simon_bolivar.typ.xml"/>
+        <osm-files value="input/simon_bolivar.osm.xml"/>
+    </input>
+
+    <output>
+        <output-file value="input/simon_bolivar.net.xml"/>
+        <plain-output-prefix value="input/simon_bolivar_plain"/>
+    </output>
+
+    <projection>
+        <proj.utm value="true"/>
+    </projection>
+
+    <processing>
+        <geometry.remove value="true"/>
+    </processing>
+
+    <tls_building>
+        <tls.guess value="true"/>
+    </tls_building>
+
+    <ramp_guessing>
+        <ramps.guess value="true"/>
+    </ramp_guessing>
+
+    <report>
+        <verbose value="true"/>
+    </report>
+
+</configuration>
+-->
+
+<tlLogics version="1.16" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tllogic_file.xsd">
+    <tlLogic id="1136623651" type="static" programID="0" offset="0">
+        <phase duration="82" state="GG"/>
+        <phase duration="3"  state="yy"/>
+        <phase duration="5"  state="rr"/>
+    </tlLogic>
+    <tlLogic id="268460806" type="static" programID="0" offset="0">
+        <phase duration="40" state="GGrrr"/>
+        <phase duration="5"  state="yyrrr"/>
+        <phase duration="40" state="rrGGG"/>
+        <phase duration="5"  state="rryyy"/>
+    </tlLogic>
+    <tlLogic id="272441515" type="static" programID="0" offset="0">
+        <phase duration="35" state="rrrrGGggrrrrGGgg"/>
+        <phase duration="5"  state="rrrryyggrrrryygg"/>
+        <phase duration="6"  state="rrrrrrGGrrrrrrGG"/>
+        <phase duration="5"  state="rrrrrryyrrrrrryy"/>
+        <phase duration="34" state="GGggrrrrGGggrrrr"/>
+        <phase duration="5"  state="yyyyrrrryyyyrrrr"/>
+    </tlLogic>
+    <tlLogic id="272441523" type="static" programID="0" offset="0">
+        <phase duration="39" state="GggrrrGGg"/>
+        <phase duration="6"  state="yyyrrryyy"/>
+        <phase duration="39" state="rrrGGgGrr"/>
+        <phase duration="6"  state="rrryyyyrr"/>
+    </tlLogic>
+    <tlLogic id="272441588" type="static" programID="0" offset="0">
+        <phase duration="39" state="GGgGggrrr"/>
+        <phase duration="6"  state="yyyyyyrrr"/>
+        <phase duration="39" state="GrrrrrGGg"/>
+        <phase duration="6"  state="yrrrrryyy"/>
+    </tlLogic>
+    <tlLogic id="272445278" type="static" programID="0" offset="0">
+        <phase duration="40" state="GggrrrGGg"/>
+        <phase duration="5"  state="yyyrrryyy"/>
+        <phase duration="40" state="rrrGGgGrr"/>
+        <phase duration="5"  state="rrryyyyrr"/>
+    </tlLogic>
+    <tlLogic id="3328967565" type="static" programID="0" offset="0">
+        <phase duration="40" state="GGGrrr"/>
+        <phase duration="5"  state="yyyrrr"/>
+        <phase duration="40" state="rrrGGG"/>
+        <phase duration="5"  state="rrryyy"/>
+    </tlLogic>
+    <tlLogic id="347687045" type="static" programID="0" offset="0">
+        <phase duration="40" state="GGrr"/>
+        <phase duration="5"  state="yyrr"/>
+        <phase duration="40" state="rrGG"/>
+        <phase duration="5"  state="rryy"/>
+    </tlLogic>
+    <tlLogic id="3667999471" type="static" programID="0" offset="0">
+        <phase duration="80" state="GGG"/>
+        <phase duration="5"  state="yyy"/>
+        <phase duration="5"  state="rrr"/>
+    </tlLogic>
+    <tlLogic id="5242461727" type="static" programID="0" offset="0">
+        <phase duration="80" state="GGGG"/>
+        <phase duration="5"  state="yyyy"/>
+        <phase duration="5"  state="rrrr"/>
+    </tlLogic>
+    <tlLogic id="6347893679" type="static" programID="0" offset="0">
+        <phase duration="82" state="GGG"/>
+        <phase duration="3"  state="yyy"/>
+        <phase duration="5"  state="rrr"/>
+    </tlLogic>
+    <tlLogic id="7009805522" type="static" programID="0" offset="0">
+        <phase duration="39" state="Grr"/>
+        <phase duration="6"  state="yrr"/>
+        <phase duration="39" state="rGG"/>
+        <phase duration="6"  state="ryy"/>
+    </tlLogic>
+    <tlLogic id="7009805535" type="static" programID="0" offset="0">
+        <phase duration="42" state="GGrrr"/>
+        <phase duration="3"  state="yyrrr"/>
+        <phase duration="42" state="rrGGG"/>
+        <phase duration="3"  state="rryyy"/>
+    </tlLogic>
+    <tlLogic id="7009805576" type="static" programID="0" offset="0">
+        <phase duration="42" state="GGGGrrrr"/>
+        <phase duration="3"  state="yyyyrrrr"/>
+        <phase duration="42" state="rrrrGGGG"/>
+        <phase duration="3"  state="rrrryyyy"/>
+    </tlLogic>
+
+    <connection from="-25042891#0" to="25043183#0" fromLane="0" toLane="0" tl="272445278" linkIndex="3"/>
+    <connection from="-25042891#0" to="-421121876#1" fromLane="0" toLane="0" tl="272445278" linkIndex="4"/>
+    <connection from="-25042891#0" to="25042891#0" fromLane="0" toLane="0" tl="272445278" linkIndex="5"/>
+    <connection from="-25043183#0" to="-421121876#1" fromLane="0" toLane="0" tl="272445278" linkIndex="0"/>
+    <connection from="-25043183#0" to="25042891#0" fromLane="0" toLane="0" tl="272445278" linkIndex="1"/>
+    <connection from="-25043183#0" to="25043183#0" fromLane="0" toLane="0" tl="272445278" linkIndex="2"/>
+    <connection from="-538972997#0" to="-431981404#1" fromLane="0" toLane="0" tl="272441515" linkIndex="4"/>
+    <connection from="-538972997#0" to="-35631490" fromLane="0" toLane="0" tl="272441515" linkIndex="5"/>
+    <connection from="-538972997#0" to="-25043183#1" fromLane="1" toLane="0" tl="272441515" linkIndex="6"/>
+    <connection from="-538972997#0" to="538972997#0" fromLane="1" toLane="0" tl="272441515" linkIndex="7"/>
+    <connection from="-97293743#0" to="-376541644" fromLane="0" toLane="0" tl="272441523" linkIndex="0"/>
+    <connection from="-97293743#0" to="-25042890" fromLane="0" toLane="0" tl="272441523" linkIndex="1"/>
+    <connection from="-97293743#0" to="97293743#0" fromLane="0" toLane="0" tl="272441523" linkIndex="2"/>
+    <connection from="-97293743#1" to="-24735617#1" fromLane="0" toLane="0" tl="272441588" linkIndex="0"/>
+    <connection from="-97293743#1" to="-97293743#0" fromLane="0" toLane="0" tl="272441588" linkIndex="1"/>
+    <connection from="-97293743#1" to="97293743#1" fromLane="0" toLane="0" tl="272441588" linkIndex="2"/>
+    <connection from="24698421" to="253234076#1" fromLane="0" toLane="0" tl="268460806" linkIndex="0"/>
+    <connection from="24698421" to="253234076#1" fromLane="1" toLane="1" tl="268460806" linkIndex="1"/>
+    <connection from="24735617#1" to="-97293743#0" fromLane="0" toLane="0" tl="272441588" linkIndex="6"/>
+    <connection from="24735617#1" to="97293743#1" fromLane="0" toLane="0" tl="272441588" linkIndex="7"/>
+    <connection from="24735617#1" to="-24735617#1" fromLane="0" toLane="0" tl="272441588" linkIndex="8"/>
+    <connection from="25042890" to="97293743#0" fromLane="0" toLane="0" tl="272441523" linkIndex="3"/>
+    <connection from="25042890" to="-376541644" fromLane="0" toLane="0" tl="272441523" linkIndex="4"/>
+    <connection from="25042890" to="-25042890" fromLane="0" toLane="0" tl="272441523" linkIndex="5"/>
+    <connection from="25043183#1" to="538972997#0" fromLane="0" toLane="0" tl="272441515" linkIndex="8"/>
+    <connection from="25043183#1" to="-431981404#1" fromLane="0" toLane="0" tl="272441515" linkIndex="9"/>
+    <connection from="25043183#1" to="-35631490" fromLane="0" toLane="0" tl="272441515" linkIndex="10"/>
+    <connection from="25043183#1" to="-25043183#1" fromLane="0" toLane="0" tl="272441515" linkIndex="11"/>
+    <connection from="253234076#0" to="253234076#1" fromLane="0" toLane="0" tl="268460806" linkIndex="2"/>
+    <connection from="253234076#0" to="253234076#1" fromLane="1" toLane="1" tl="268460806" linkIndex="3"/>
+    <connection from="253234076#0" to="253234076#1" fromLane="2" toLane="2" tl="268460806" linkIndex="4"/>
+    <connection from="253234094#1" to="893291302" fromLane="0" toLane="0" tl="3328967565" linkIndex="0"/>
+    <connection from="253234094#1" to="893291301" fromLane="0" toLane="0" tl="3328967565" linkIndex="1"/>
+    <connection from="253234094#1" to="893291301" fromLane="0" toLane="1" tl="3328967565" linkIndex="2"/>
+    <connection from="314066420#3" to="535910621#1" fromLane="0" toLane="0" tl="3667999471" linkIndex="0"/>
+    <connection from="314066420#3" to="535910621#1" fromLane="1" toLane="1" tl="3667999471" linkIndex="1"/>
+    <connection from="314066420#3" to="535910621#1" fromLane="2" toLane="2" tl="3667999471" linkIndex="2"/>
+    <connection from="31896623" to="893291303" fromLane="0" toLane="0" tl="7009805535" linkIndex="0"/>
+    <connection from="31896623" to="893291303" fromLane="1" toLane="1" tl="7009805535" linkIndex="1"/>
+    <connection from="31896632" to="535554955#0" fromLane="0" toLane="0" tl="347687045" linkIndex="0"/>
+    <connection from="31896632" to="535554955#0" fromLane="1" toLane="1" tl="347687045" linkIndex="1"/>
+    <connection from="35631490" to="-25043183#1" fromLane="0" toLane="0" tl="272441515" linkIndex="12"/>
+    <connection from="35631490" to="538972997#0" fromLane="0" toLane="0" tl="272441515" linkIndex="13"/>
+    <connection from="35631490" to="-431981404#1" fromLane="0" toLane="0" tl="272441515" linkIndex="14"/>
+    <connection from="35631490" to="-35631490" fromLane="0" toLane="0" tl="272441515" linkIndex="15"/>
+    <connection from="376541644" to="-25042890" fromLane="0" toLane="0" tl="272441523" linkIndex="6"/>
+    <connection from="376541644" to="97293743#0" fromLane="0" toLane="0" tl="272441523" linkIndex="7"/>
+    <connection from="376541644" to="-376541644" fromLane="0" toLane="0" tl="272441523" linkIndex="8"/>
+    <connection from="421121876#1" to="25042891#0" fromLane="0" toLane="0" tl="272445278" linkIndex="6"/>
+    <connection from="421121876#1" to="25043183#0" fromLane="0" toLane="0" tl="272445278" linkIndex="7"/>
+    <connection from="421121876#1" to="-421121876#1" fromLane="0" toLane="0" tl="272445278" linkIndex="8"/>
+    <connection from="431736160#0" to="431736160#1" fromLane="0" toLane="0" tl="6347893679" linkIndex="0"/>
+    <connection from="431736160#0" to="431736160#1" fromLane="1" toLane="1" tl="6347893679" linkIndex="1"/>
+    <connection from="431736160#0" to="431736160#1" fromLane="2" toLane="2" tl="6347893679" linkIndex="2"/>
+    <connection from="431736160#2" to="893291303" fromLane="0" toLane="0" tl="7009805535" linkIndex="2"/>
+    <connection from="431736160#2" to="893291303" fromLane="1" toLane="1" tl="7009805535" linkIndex="3"/>
+    <connection from="431736160#2" to="893291303" fromLane="2" toLane="2" tl="7009805535" linkIndex="4"/>
+    <connection from="431947110#0" to="431947110#1" fromLane="0" toLane="0" tl="1136623651" linkIndex="0"/>
+    <connection from="431947110#0" to="431947110#1" fromLane="1" toLane="1" tl="1136623651" linkIndex="1"/>
+    <connection from="431947110#1" to="535554955#0" fromLane="0" toLane="0" tl="347687045" linkIndex="2"/>
+    <connection from="431947110#1" to="535554955#0" fromLane="1" toLane="1" tl="347687045" linkIndex="3"/>
+    <connection from="431981404#1" to="-35631490" fromLane="0" toLane="0" tl="272441515" linkIndex="0"/>
+    <connection from="431981404#1" to="-25043183#1" fromLane="0" toLane="0" tl="272441515" linkIndex="1"/>
+    <connection from="431981404#1" to="538972997#0" fromLane="0" toLane="0" tl="272441515" linkIndex="2"/>
+    <connection from="431981404#1" to="-431981404#1" fromLane="0" toLane="0" tl="272441515" linkIndex="3"/>
+    <connection from="535910621#1-AddedOffRampEdge" to="535910621#2" fromLane="0" toLane="0" tl="5242461727" linkIndex="0"/>
+    <connection from="535910621#1-AddedOffRampEdge" to="535910621#2" fromLane="1" toLane="1" tl="5242461727" linkIndex="1"/>
+    <connection from="535910621#1-AddedOffRampEdge" to="535910621#2" fromLane="2" toLane="2" tl="5242461727" linkIndex="2"/>
+    <connection from="535910621#1-AddedOffRampEdge" to="535910621#2" fromLane="3" toLane="3" tl="5242461727" linkIndex="3"/>
+    <connection from="749607430#0" to="749607430#1" fromLane="0" toLane="0" tl="7009805522" linkIndex="1"/>
+    <connection from="749607430#0" to="749607430#1" fromLane="1" toLane="1" tl="7009805522" linkIndex="2"/>
+    <connection from="768291362" to="749607430#1" fromLane="0" toLane="0" tl="7009805522" linkIndex="0"/>
+    <connection from="893291301" to="893291300" fromLane="0" toLane="0" tl="7009805576" linkIndex="4"/>
+    <connection from="893291301" to="893291300" fromLane="1" toLane="1" tl="7009805576" linkIndex="5"/>
+    <connection from="893291301" to="253234076#0" fromLane="1" toLane="1" tl="7009805576" linkIndex="6"/>
+    <connection from="893291301" to="253234076#0" fromLane="1" toLane="2" tl="7009805576" linkIndex="7"/>
+    <connection from="893291303" to="893291302" fromLane="0" toLane="0" tl="3328967565" linkIndex="3"/>
+    <connection from="893291303" to="893291302" fromLane="1" toLane="1" tl="3328967565" linkIndex="4"/>
+    <connection from="893291303" to="893291302" fromLane="2" toLane="2" tl="3328967565" linkIndex="5"/>
+    <connection from="894824784" to="893291300" fromLane="0" toLane="0" tl="7009805576" linkIndex="0"/>
+    <connection from="894824784" to="253234076#0" fromLane="0" toLane="0" tl="7009805576" linkIndex="1"/>
+    <connection from="894824784" to="253234076#0" fromLane="1" toLane="1" tl="7009805576" linkIndex="2"/>
+    <connection from="894824784" to="253234076#0" fromLane="2" toLane="2" tl="7009805576" linkIndex="3"/>
+    <connection from="97293743#0" to="97293743#1" fromLane="0" toLane="0" tl="272441588" linkIndex="3"/>
+    <connection from="97293743#0" to="-24735617#1" fromLane="0" toLane="0" tl="272441588" linkIndex="4"/>
+    <connection from="97293743#0" to="-97293743#0" fromLane="0" toLane="0" tl="272441588" linkIndex="5"/>
+</tlLogics>

@@ -1,0 +1,11 @@
+<configuration>
+  <input>
+    <net-file value="..\input\simon_bolivar.net.xml" />
+    <route-files value="..\input\simon_bolivar_roi_80.rou.xml" />
+    <additional-files value="input/roi_simon_bolivar.add.xml,input/source_node.add.xml" />
+  </input>
+  <time>
+    <begin value="0" />
+    <end value="3600" />
+  </time>
+</configuration>

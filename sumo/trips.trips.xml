@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2025-05-04 06:11:59.504362 by randomTrips.py 9a83456
+<configuration>
+    <net-file value="input/simon_bolivar.net.xml"/>
+    <route-file value="input/simon_bolivar_60.rou.xml"/>
+    <prefix value="v60_"/>
+    <trip-attributes value="departLane=&quot;best&quot; departSpeed=&quot;max&quot; departPos=&quot;random&quot;"/>
+    <fringe-factor value="3"/>
+    <min-distance value="800.0"/>
+    <validate value="True"/>
+    <end value="1000.0"/>
+    <insertion-rate value="0.052"/>
+</configuration>
+-->
+
+<!-- generated on 2025-05-04 06:11:59 by Eclipse SUMO duarouter Version 1.18.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
+
+    <input>
+        <net-file value="input/simon_bolivar.net.xml"/>
+        <route-files value="trips.trips.xml"/>
+    </input>
+
+    <output>
+        <output-file value="trips.trips.xml.tmp"/>
+        <alternatives-output value="NUL"/>
+        <write-trips value="true"/>
+    </output>
+
+    <time>
+        <begin value="0"/>
+        <end value="1000.0"/>
+    </time>
+
+    <report>
+        <no-warnings value="true"/>
+        <ignore-errors value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <trip id="v60_0" depart="0.00" departLane="best" departPos="random" departSpeed="max" from="24735618#1" to="-1190782928"/>
+</routes>
