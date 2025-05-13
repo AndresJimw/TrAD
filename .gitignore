@@ -1,0 +1,65 @@
+# =====================
+# Archivos del sistema
+# =====================
+*.bak
+*.tmp
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# =====================
+# Entornos de desarrollo
+# =====================
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+
+# =====================
+# SUMO - Archivos generados
+# =====================
+# Excluir archivos de rutas y configs generados automáticamente (excepto los originales)
+sumo/config/*.rou.alt.xml
+sumo/config/*.rou.xml
+sumo/config/*.trips.xml
+sumo/config/*.sumocfg.bak
+
+# Excluir archivos de salida de simulaciones
+sumo/output/*
+!sumo/output/.gitkeep  # (opcional: para mantener la carpeta)
+
+# Archivos temporales de SUMO
+*.sbx
+*.sbo
+
+# =====================
+# OMNeT++ 
+# =====================
+omnet/results/*
+omnet/trad-module/*.so
+omnet/trad-module/*.o
+omnet/trad-module/Makefile
+
+# =====================
+# Python / Scripts
+# =====================
+*.egg-info/
+dist/
+build/
+
+# =====================
+# Archivos pesados/binarios
+# =====================
+*.zip
+*.tar.gz
+*.7z
+*.dll
+*.exe
+
+# =====================
+# Archivos sensibles
+# =====================
+*.local
+*.env
+credentials.*
