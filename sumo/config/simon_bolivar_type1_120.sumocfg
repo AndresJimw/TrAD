@@ -2,7 +2,7 @@
   <input>
     <net-file value="..\input\simon_bolivar.net.xml" />
     <route-files value="..\input\simon_bolivar_roi_120.rou.xml" />
-    <additional-files value="input/roi_simon_bolivar.add.xml,input/source_node.add.xml" />
+    <additional-files value="..\input\vehicles.add.xml,..\input\roi_simon_bolivar.add.xml" />
   </input>
   <time>
     <begin value="0" />

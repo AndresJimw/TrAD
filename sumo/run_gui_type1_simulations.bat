@@ -11,5 +11,5 @@ for %%D in (%DENSITIES%) do (
     start /wait sumo-gui -c simon_bolivar_type1_%%D.sumocfg
 )
 
-echo ✅ Todas las simulaciones tipo 1 han sido ejecutadas.
+echo Todas las simulaciones tipo 1 han sido ejecutadas.
 pause
