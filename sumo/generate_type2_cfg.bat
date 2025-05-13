@@ -1,58 +1,64 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM Directorios base
-set INPUT_DIR=input
-set CONFIG_DIR=config
+:: CONFIGURACIÓN
+set PROJECT_ROOT=D:\TrAD-Quito
 set TOOLS_DIR=D:\sumo-1.18.0\tools
+set INPUT_DIR=%PROJECT_ROOT%\sumo\input
+set CONFIG_DIR=%PROJECT_ROOT%\sumo\config
+set NET_FILE=%INPUT_DIR%\simon_bolivar.net.xml
+set VEHICLE_TYPES=%INPUT_DIR%\vehicles.add.xml
 
-REM Densidades a procesar
-set DENSITIES=40 60 80 100 120 140 160
+cd /d %PROJECT_ROOT%
 
-echo Generando archivos .sumocfg para rutas tipo 2...
-
-for %%D in (%DENSITIES%) do (
-    echo.
+for %%D in (40 60 80 100 120 140 160) do (
     echo ============================
-    echo Generando configuración para densidad %%D...
-    echo ============================
+    echo Generando rutas tipo 2 para densidad %%D...
 
-    REM Definir nombres de archivo directamente en línea sin set
-    echo 🔄 Generando viajes para densidad %%D...
-    python "!TOOLS_DIR!\randomTrips.py" ^
-        -n "%INPUT_DIR%\simon_bolivar.net.xml" ^
+    python "%TOOLS_DIR%\randomTrips.py" ^
+        -n "%NET_FILE%" ^
         -o "%INPUT_DIR%\simon_bolivar_type2_%%D.trips.xml" ^
         --prefix type2_%%D ^
         --trip-attributes "departLane='best' departSpeed='max' departPos='random'" ^
         --validate ^
-        --fringe-factor 3 ^
+        --fringe-factor 6 ^
         --insertion-density %%D ^
+        --begin 0 --end 3600 ^
         --seed %%D
 
-    echo 🛣️ Convirtiendo trips a rutas...
-    duarouter -n "%INPUT_DIR%\simon_bolivar.net.xml" ^
-              -r "%INPUT_DIR%\simon_bolivar_type2_%%D.trips.xml" ^
-              -o "%INPUT_DIR%\simon_bolivar_type2_%%D.rou.xml"
+    if exist "%INPUT_DIR%\simon_bolivar_type2_%%D.trips.xml" (
+        echo Ejecutando duarouter para densidad %%D...
 
-    echo 📄 Creando archivo de configuración .sumocfg...
-    (
-        echo ^<configuration^>
-        echo     ^<input^>
-        echo         ^<net-file value="..\%INPUT_DIR%\simon_bolivar.net.xml"/^>
-        echo         ^<route-files value="..\%INPUT_DIR%\simon_bolivar_type2_%%D.rou.xml"/^>
-        echo         ^<additional-files value="..\%INPUT_DIR%\roi_simon_bolivar.add.xml,..\%INPUT_DIR%\source_node.add.xml"/^>
-        echo     ^</input^>
-        echo     ^<time^>
-        echo         ^<begin value="0"/^>
-        echo         ^<end value="3600"/^>
-        echo     ^</time^>
-        echo ^</configuration^>
-    ) > "%CONFIG_DIR%\simon_bolivar_type2_%%D.sumocfg"
+        duarouter -n "%NET_FILE%" ^
+            --trip-files "%INPUT_DIR%\simon_bolivar_type2_%%D.trips.xml" ^
+            --additional-files "%VEHICLE_TYPES%" ^
+            -o "%INPUT_DIR%\simon_bolivar_type2_%%D.rou.xml"
 
-    echo ✔️ Densidad %%D procesada.
+        echo Limpiando definición duplicada de vType...
+        findstr /V "<vType " "%INPUT_DIR%\simon_bolivar_type2_%%D.rou.xml" > "%INPUT_DIR%\temp_%%D.rou.xml"
+        del /f /q "%INPUT_DIR%\simon_bolivar_type2_%%D.rou.xml"
+        move /Y "%INPUT_DIR%\temp_%%D.rou.xml" "%INPUT_DIR%\simon_bolivar_type2_%%D.rou.xml"
+
+        echo Creando archivo .sumocfg...
+        (
+            echo ^<configuration^>
+            echo     ^<input^>
+            echo         ^<net-file value="..\input\simon_bolivar.net.xml"/^>
+            echo         ^<route-files value="..\input\simon_bolivar_type2_%%D.rou.xml"/^>
+            echo         ^<additional-files value="..\input\roi_simon_bolivar.add.xml,..\input\vehicles.add.xml"/^>
+            echo     ^</input^>
+            echo     ^<time^>
+            echo         ^<begin value="0"/^>
+            echo         ^<end value="3600"/^>
+            echo     ^</time^>
+            echo ^</configuration^>
+        ) > "%CONFIG_DIR%\simon_bolivar_type2_%%D.sumocfg"
+
+    ) else (
+        echo [ERROR] No se generó el archivo de trips para densidad %%D
+    )
 )
 
 echo.
-echo ✅ Todos los archivos .sumocfg tipo 2 han sido generados correctamente.
-endlocal
+echo Todas las rutas tipo 2 fueron procesadas correctamente.
 pause
