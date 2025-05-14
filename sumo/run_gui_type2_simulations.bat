@@ -1,25 +1,44 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM Ruta a SUMO-GUI
-set SUMO_GUI="D:\sumo-1.18.0\bin\sumo-gui.exe"
+REM ========================================================
+REM LANZADOR DE SIMULACIONES TYPE 2 (FUERA DEL ROI) EN GUI
+REM Usuario selecciona densidad a simular
+REM ========================================================
 
-REM Directorio donde están los archivos .sumocfg
-set CONFIG_DIR=config
+set PROJECT_ROOT=D:\TrAD-Quito
+set SUMO_GUI=sumo-gui
+set CONFIG_DIR=%PROJECT_ROOT%\sumo\config
 
-REM Densidades a simular
-set DENSITIES=40 60 80 100 120 140 160
+REM Mostrar opciones disponibles
+echo Simulaciones disponibles para TYPE 2:
+echo -------------------------------------
+echo [1]  500 veh/km2
+echo [2]  1000 veh/km2
+echo [3]  2500 veh/km2
+echo [4]  5000 veh/km2
+echo.
 
-echo Iniciando simulaciones en SUMO-GUI para rutas tipo 2...
+set /p OPTION=Selecciona una opcion (1-4):
 
-for %%D in (%DENSITIES%) do (
-    echo.
-    echo Simulación tipo 2 con densidad %%D...
-    start "" %SUMO_GUI% -c %CONFIG_DIR%\simon_bolivar_type2_%%D.sumocfg
-    timeout /t 2 >nul
+if "%OPTION%"=="1" set DENSITY=500
+if "%OPTION%"=="2" set DENSITY=1000
+if "%OPTION%"=="3" set DENSITY=2500
+if "%OPTION%"=="4" set DENSITY=5000
+
+if not defined DENSITY (
+    echo Opcion invalida. Saliendo...
+    pause
+    exit /b
 )
 
-echo.
-echo Todas las simulaciones fueron lanzadas en SUMO-GUI.
-endlocal
+set CONFIG_FILE=%CONFIG_DIR%\simon_bolivar_type2_%DENSITY%.sumocfg
+
+if exist "!CONFIG_FILE!" (
+    echo Abriendo simulacion con densidad %DENSITY% veh/km2...
+    %SUMO_GUI% -c "!CONFIG_FILE!"
+) else (
+    echo No se encontro el archivo de configuración: !CONFIG_FILE!
+)
+
 pause

@@ -6,11 +6,12 @@ import argparse
 
 # Agregar path de sumolib
 sys.path.append(r"D:\sumo-1.18.0\tools")
-
 from sumolib.net import readNet
 
+# Argumentos
 parser = argparse.ArgumentParser()
-parser.add_argument("--vehicles", type=int, default=500, help="Cantidad de vehículos a generar")
+parser.add_argument("--vehicles", type=int, help="Cantidad de vehículos a generar (prioridad sobre density)")
+parser.add_argument("--density", type=float, help="Densidad en vehículos por km² (veh/km²)")
 parser.add_argument("--output", type=str, default=r"D:\TrAD-Quito\sumo\input\simon_bolivar_roi.trips.xml", help="Ruta del archivo .trips.xml de salida")
 parser.add_argument("--begin", type=int, default=0, help="Tiempo de inicio de simulación (segundos)")
 parser.add_argument("--end", type=int, default=3600, help="Tiempo de fin de simulación (segundos)")
@@ -20,10 +21,20 @@ args = parser.parse_args()
 NET_FILE = r"D:\TrAD-Quito\sumo\input\simon_bolivar.net.xml"
 ROI_EDGES_FILE = r"D:\TrAD-Quito\sumo\input\roi_edges.txt"
 OUTPUT_TRIPS_FILE = args.output
-NUMBER_OF_VEHICLES = args.vehicles
 BEGIN_TIME = args.begin
 END_TIME = args.end
 TYPE = "veh_passenger"
+ROI_AREA_KM2 = 0.083
+
+# Determinar número de vehículos
+if args.vehicles is not None:
+    NUMBER_OF_VEHICLES = args.vehicles
+elif args.density is not None:
+    NUMBER_OF_VEHICLES = int(args.density * ROI_AREA_KM2)
+    print(f"Usando densidad de {args.density} veh/km² en área {ROI_AREA_KM2} km² → {NUMBER_OF_VEHICLES} vehículos")
+else:
+    NUMBER_OF_VEHICLES = 500  # valor por defecto
+    print(f"Usando valor por defecto: {NUMBER_OF_VEHICLES} vehículos")
 
 # Leer edges del ROI
 with open(ROI_EDGES_FILE, 'r') as f:
@@ -35,7 +46,7 @@ if not raw_edges:
 print("Cargando red SUMO...")
 net = readNet(NET_FILE)
 
-# Validar edges que existan y sean usables
+# Validar edges del ROI
 print("Validando edges del ROI...")
 roi_edges = []
 for edge_id in raw_edges:
@@ -104,5 +115,6 @@ for i, (from_edge, to_edge) in enumerate(valid_trips):
 tree = ET.ElementTree(root)
 tree.write(OUTPUT_TRIPS_FILE, encoding='UTF-8', xml_declaration=True)
 
+print(f"Total edges válidos en el ROI: {len(roi_edges)}")
 print(f"Generado {len(valid_trips)} trips válidos.")
 print(f"Guardado en: {OUTPUT_TRIPS_FILE}")

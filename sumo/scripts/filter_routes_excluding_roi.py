@@ -2,30 +2,40 @@ import xml.etree.ElementTree as ET
 import os
 
 input_dir = r"D:\TrAD-Quito\sumo\input"
+roi_file = os.path.join(input_dir, "roi_edges.txt")
 
-# Cargar edges prohibidos (ROI)
-with open(os.path.join(input_dir, "roi_edges.txt"), "r") as f:
+# Leer edges prohibidos
+with open(roi_file, "r") as f:
     roi_edges = set(line.strip() for line in f if line.strip())
 
-for density in [40, 60, 80, 100, 120, 140, 160]:
-    input_file = os.path.join(input_dir, f"simon_bolivar_type2_{density}_filtered.rou.xml")
-    output_file = os.path.join(input_dir, f"simon_bolivar_type2_{density}_final.rou.xml")
+# Densidades usadas
+densities = [500, 1000, 2500, 5000]
+
+for density in densities:
+    input_file = os.path.join(input_dir, f"routes_type2_{density}.rou.xml")
+    output_file = os.path.join(input_dir, f"routes_type2_{density}_filtered.rou.xml")
 
     tree = ET.parse(input_file)
     root = tree.getroot()
 
-    routes = root.findall("vehicle")
-    total = len(routes)
+    total = 0
     removed = 0
 
-    for vehicle in routes:
+    for vehicle in list(root.findall("vehicle")):
+        total += 1
         route = vehicle.find("route")
-        if route is None:
-            continue
-        edges = route.attrib.get("edges", "").split()
-        if any(edge in roi_edges for edge in edges):
-            root.remove(vehicle)
-            removed += 1
 
-    tree.write(output_file, encoding="UTF-8")
+        # Soporte para routeDistribution
+        if route is None:
+            rd = vehicle.find("routeDistribution")
+            if rd is not None:
+                route = rd.find("route")
+
+        if route is not None:
+            edges = route.get("edges", "").split()
+            if any(e in roi_edges for e in edges):
+                root.remove(vehicle)
+                removed += 1
+
+    tree.write(output_file, encoding="UTF-8", xml_declaration=True)
     print(f"[{density}] Guardado: {output_file} - {total - removed}/{total} rutas válidas")

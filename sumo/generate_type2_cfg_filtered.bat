@@ -1,51 +1,44 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: CONFIGURACIÓN
+REM ============================================================
+REM GENERA ARCHIVOS .sumocfg TYPE 2 FILTRADOS (fuera del ROI)
+REM Usa: routes_type2_%%D_filtered.rou.xml
+REM Salida: simon_bolivar_type2_%%D_filtered.sumocfg
+REM ============================================================
+
 set PROJECT_ROOT=D:\TrAD-Quito
-set TOOLS_DIR=D:\sumo-1.18.0\tools
-set INPUT_DIR=%PROJECT_ROOT%\sumo\input
 set CONFIG_DIR=%PROJECT_ROOT%\sumo\config
-set NET_FILE=%INPUT_DIR%\simon_bolivar.net.xml
-set VEHICLE_TYPES=%INPUT_DIR%\vehicles.add.xml
+set INPUT_DIR=%PROJECT_ROOT%\sumo\input
+set NET_FILE=..\input\simon_bolivar.net.xml
+set ADDITIONAL=..\input\roi_simon_bolivar.add.xml,..\input\vehicles.add.xml
 
-cd /d %PROJECT_ROOT%
+cd /d %CONFIG_DIR%
 
-for %%D in (40 60 80 100 120 140 160) do (
-    echo ============================
-    echo Procesando densidad %%D...
+for %%D in (500 1000 2500 5000) do (
+    set "ROUTE_FILE=..\input\routes_type2_%%D_filtered.rou.xml"
+    set "SUMOCFG_FILE=simon_bolivar_type2_%%D_filtered.sumocfg"
 
-    :: Rutas filtradas
-    set TRIPS_FILE=%INPUT_DIR%\simon_bolivar_type2_%%D_filtered.trips.xml
-    set ROU_FILE=%INPUT_DIR%\simon_bolivar_type2_%%D_filtered.rou.xml
-    set SUMO_FILE=%CONFIG_DIR%\simon_bolivar_type2_%%D_filtered.sumocfg
+    echo Generando archivo !SUMOCFG_FILE!...
 
-    duarouter -n "%NET_FILE%" ^
-        --trip-files "!TRIPS_FILE!" ^
-        --additional-files "%VEHICLE_TYPES%" ^
-        -o "!ROU_FILE!"
-
-    echo Limpiando vType duplicado...
-    findstr /V "<vType " "!ROU_FILE!" > "%INPUT_DIR%\temp_%%D.rou.xml"
-    del /f /q "!ROU_FILE!"
-    move /Y "%INPUT_DIR%\temp_%%D.rou.xml" "!ROU_FILE!" >nul
-
-    echo Generando archivo .sumocfg...
     (
         echo ^<configuration^>
         echo     ^<input^>
-        echo         ^<net-file value="..\input\simon_bolivar.net.xml"/^>
-        echo         ^<route-files value="..\input\simon_bolivar_type2_%%D_filtered.rou.xml"/^>
-        echo         ^<additional-files value="..\input\roi_simon_bolivar.add.xml,..\input\vehicles.add.xml"/^>
+        echo         ^<net-file value="!NET_FILE!"/^>
+        echo         ^<route-files value="!ROUTE_FILE!"/^>
+        echo         ^<additional-files value="!ADDITIONAL!"/^>
         echo     ^</input^>
         echo     ^<time^>
         echo         ^<begin value="0"/^>
         echo         ^<end value="3600"/^>
         echo     ^</time^>
+        echo     ^<output^>
+        echo         ^<tripinfo-output value="..\output\tripinfo_type2_%%D_filtered.xml"/^>
+        echo     ^</output^>
         echo ^</configuration^>
-    ) > "!SUMO_FILE!"
+    ) > !SUMOCFG_FILE!
 )
 
 echo.
-echo Todos los archivos filtrados han sido procesados correctamente.
+echo Archivos .sumocfg filtrados generados correctamente.
 pause

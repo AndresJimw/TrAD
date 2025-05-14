@@ -1,45 +1,60 @@
 @echo off
 setlocal enabledelayedexpansion
 
+REM ======================================================
+REM GENERADOR DE RUTAS TYPE 1 (DENTRO DEL ROI) - REALISTA
+REM Densidades: 500 1000 2500 5000 veh/km²
+REM Entrada: trips_type1_%%D.trips.xml
+REM Salida:  routes_type1_%%D.rou.xml (limpios)
+REM ======================================================
+
 :: Configuración de rutas
 set PROJECT_ROOT=D:\TrAD-Quito
-set SCRIPTS_DIR=%PROJECT_ROOT%\sumo\scripts
 set INPUT_DIR=%PROJECT_ROOT%\sumo\input
 set NET_FILE=%INPUT_DIR%\simon_bolivar.net.xml
 set VEHICLE_TYPES=%INPUT_DIR%\vehicles.add.xml
 
-:: Ir a la raíz del proyecto
 cd /d %PROJECT_ROOT%
 
-:: Iterar sobre las densidades
-for %%D in (40 60 80 100 120 140 160) do (
+for %%D in (500 1000 2500 5000) do (
     echo.
     echo ============================
-    echo Generando rutas tipo 1 para densidad %%D...
+    echo Generando rutas type 1 para densidad %%D...
     echo ============================
 
-    :: Generar archivo .trips.xml con el nombre correspondiente
-    python %SCRIPTS_DIR%\generate_trips_roi.py --vehicles %%D --output %INPUT_DIR%\simon_bolivar_roi_%%D.trips.xml
+    set "TRIP_FILE=!INPUT_DIR!\trips_type1_%%D.trips.xml"
+    set "ROUTE_FILE=!INPUT_DIR!\routes_type1_%%D.rou.xml"
+    set "TEMP_FILE=!INPUT_DIR!\temp_%%D.rou.xml"
 
-    if exist %INPUT_DIR%\simon_bolivar_roi_%%D.trips.xml (
-        echo Archivo de trips generado. Ejecutando duarouter...
+    if exist !TRIP_FILE! (
+        echo Ejecutando duarouter...
 
-        :: Ejecutar duarouter para generar el .rou.xml correspondiente
-        duarouter -n %NET_FILE% ^
-            --trip-files %INPUT_DIR%\simon_bolivar_roi_%%D.trips.xml ^
-            --additional-files %VEHICLE_TYPES% ^
-            -o %INPUT_DIR%\simon_bolivar_roi_%%D.rou.xml
+        duarouter -n !NET_FILE! ^
+            --route-files !TRIP_FILE! ^
+            --additional-files !VEHICLE_TYPES! ^
+            -o !ROUTE_FILE!
 
-        :: Eliminar línea de definición de vType redundante del archivo .rou.xml
-        findstr /V "<vType " %INPUT_DIR%\simon_bolivar_roi_%%D.rou.xml > %INPUT_DIR%\temp_%%D.rou.xml
-        del /f /q %INPUT_DIR%\simon_bolivar_roi_%%D.rou.xml
-        move /Y %INPUT_DIR%\temp_%%D.rou.xml %INPUT_DIR%\simon_bolivar_roi_%%D.rou.xml >nul
+        timeout /t 1 >nul
 
+        if exist !ROUTE_FILE! (
+            echo Limpiando definiciones de vType...
+            findstr /V "<vType " !ROUTE_FILE! > !TEMP_FILE!
+
+            if exist !TEMP_FILE! (
+                del /f /q !ROUTE_FILE!
+                move /Y !TEMP_FILE! !ROUTE_FILE! >nul
+                echo Rutas generadas correctamente: !ROUTE_FILE!
+            ) else (
+                echo Advertencia: no se genero el archivo temporal. Se omite limpieza.
+            )
+        ) else (
+            echo Error: duarouter no genero el archivo esperado: !ROUTE_FILE!
+        )
     ) else (
-        echo No se encontró el archivo de trips generado. Se omite densidad %%D.
+        echo Error: archivo de trips no encontrado: !TRIP_FILE!
     )
 )
 
 echo.
-echo Todas las rutas tipo 1 fueron procesadas.
+echo Proceso finalizado. Todas las rutas type 1 fueron procesadas.
 pause
