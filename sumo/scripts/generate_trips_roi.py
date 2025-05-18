@@ -11,7 +11,7 @@ from sumolib.net import readNet
 # Argumentos
 parser = argparse.ArgumentParser()
 parser.add_argument("--vehicles", type=int, help="Cantidad de vehículos a generar (prioridad sobre density)")
-parser.add_argument("--density", type=float, help="Densidad en vehículos por km² (veh/km²)")
+parser.add_argument("--density", type=float, help="Densidad en vehículos por km2 (veh/km2)")
 parser.add_argument("--output", type=str, default=r"D:\TrAD-Quito\sumo\input\simon_bolivar_roi.trips.xml", help="Ruta del archivo .trips.xml de salida")
 parser.add_argument("--begin", type=int, default=0, help="Tiempo de inicio de simulación (segundos)")
 parser.add_argument("--end", type=int, default=3600, help="Tiempo de fin de simulación (segundos)")
@@ -33,7 +33,7 @@ elif args.density is not None:
     NUMBER_OF_VEHICLES = int(args.density * ROI_AREA_KM2)
     print(f"Usando densidad de {args.density} veh/km² en área {ROI_AREA_KM2} km² → {NUMBER_OF_VEHICLES} vehículos")
 else:
-    NUMBER_OF_VEHICLES = 500  # valor por defecto
+    NUMBER_OF_VEHICLES = 500 
     print(f"Usando valor por defecto: {NUMBER_OF_VEHICLES} vehículos")
 
 # Leer edges del ROI

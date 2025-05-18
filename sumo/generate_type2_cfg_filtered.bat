@@ -15,7 +15,7 @@ set ADDITIONAL=..\input\roi_simon_bolivar.add.xml,..\input\vehicles.add.xml
 
 cd /d %CONFIG_DIR%
 
-for %%D in (500 1000 2500 5000) do (
+for %%D in (1000, 3000, 6000, 10000) do (
     set "ROUTE_FILE=..\input\routes_type2_%%D_filtered.rou.xml"
     set "SUMOCFG_FILE=simon_bolivar_type2_%%D_filtered.sumocfg"
 

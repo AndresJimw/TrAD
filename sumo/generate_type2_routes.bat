@@ -14,7 +14,7 @@ set VEHICLE_TYPES=%INPUT_DIR%\vehicles.add.xml
 
 cd /d %PROJECT_ROOT%
 
-for %%D in (500 1000 2500 5000) do (
+for %%D in (1000, 3000, 6000, 10000) do (
     echo ============================
     echo Procesando densidad %%D...
     echo ============================
