@@ -3,6 +3,7 @@ import random
 import xml.etree.ElementTree as ET
 import sys
 import argparse
+import xml.dom.minidom
 
 # Agregar path de sumolib
 sys.path.append(r"D:\sumo-1.18.0\tools")
@@ -82,7 +83,9 @@ if not roi_edges:
 print("Generando trips válidos...")
 valid_trips = []
 attempts = 0
-max_attempts = NUMBER_OF_VEHICLES * 10
+max_attempts = NUMBER_OF_VEHICLES * 50
+
+print(f"Intentando generar {NUMBER_OF_VEHICLES} trips válidos... (máx. {max_attempts} intentos)")
 
 while len(valid_trips) < NUMBER_OF_VEHICLES and attempts < max_attempts:
     from_edge = to_edge = random.choice(roi_edges)
@@ -96,8 +99,13 @@ while len(valid_trips) < NUMBER_OF_VEHICLES and attempts < max_attempts:
         pass
     attempts += 1
 
-if not valid_trips:
-    raise Exception("No se pudieron generar rutas válidas.")
+if len(valid_trips) < NUMBER_OF_VEHICLES:
+    print(f"[ADVERTENCIA] Solo se pudieron generar {len(valid_trips)} trips de los {NUMBER_OF_VEHICLES} requeridos.")
+else:
+    print(f"Se generaron correctamente los {len(valid_trips)} trips requeridos.")
+
+if len(valid_trips) == 0:
+    raise Exception("No se generaron trips válidos. No se puede construir el archivo .trips.xml.")
 
 # Guardar trips
 interval = (END_TIME - BEGIN_TIME) / len(valid_trips)
@@ -112,8 +120,12 @@ for i, (from_edge, to_edge) in enumerate(valid_trips):
         'to': to_edge
     })
 
-tree = ET.ElementTree(root)
-tree.write(OUTPUT_TRIPS_FILE, encoding='UTF-8', xml_declaration=True)
+rough_string = ET.tostring(root, 'utf-8')
+reparsed = xml.dom.minidom.parseString(rough_string)
+pretty_xml = reparsed.toprettyxml(indent="  ")
+
+with open(OUTPUT_TRIPS_FILE, "w", encoding="utf-8") as f:
+    f.write(pretty_xml)
 
 print(f"Total edges válidos en el ROI: {len(roi_edges)}")
 print(f"Generado {len(valid_trips)} trips válidos.")
