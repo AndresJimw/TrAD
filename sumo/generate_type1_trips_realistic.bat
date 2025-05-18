@@ -1,19 +1,26 @@
 @echo off
+setlocal enabledelayedexpansion
+
 REM ==========================================
 REM GENERADOR DE TRIPS TYPE 1 (DENTRO DEL ROI)
-REM Densidades: 500–5000 veh/km²
-REM Salida: trips_type1_<densidad>.trips.xml
+REM Densidades: 1000–10000 veh/km²
+REM Salida: trips_type1_<vehiculos_aprox>.trips.xml
 REM ==========================================
 
 set PYTHON=python
 set SCRIPT=D:\TrAD-Quito\sumo\scripts\generate_trips_roi.py
 set OUTPUT_DIR=D:\TrAD-Quito\sumo\input
 
-for %%D in (500 1000 2500 5000) do (
-    echo -----------------------------------------
-    echo Generando trips para densidad %%D veh/km2...
-    %PYTHON% %SCRIPT% --density %%D --output %OUTPUT_DIR%\trips_type1_%%D.trips.xml
+for %%D in (1000 3000 6000 10000) do (
+    if %%D==1000  set NAME=83
+    if %%D==3000  set NAME=250
+    if %%D==6000  set NAME=500
+    if %%D==10000 set NAME=830
+
+    echo Generando trips_type1_!NAME!.trips.xml con densidad %%D veh/km2...
+    %PYTHON% %SCRIPT% --density %%D --output %OUTPUT_DIR%\trips_type1_!NAME!.trips.xml
 )
+
 echo -----------------------------------------
 echo Todos los trips fueron generados.
 pause

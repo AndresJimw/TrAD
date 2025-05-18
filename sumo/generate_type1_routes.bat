@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 REM ======================================================
 REM GENERADOR DE RUTAS TYPE 1 (DENTRO DEL ROI) - REALISTA
-REM Densidades: 500 1000 2500 5000 veh/km²
+REM Vehículos aproximados: 83, 250, 500, 830
 REM Entrada: trips_type1_%%D.trips.xml
 REM Salida:  routes_type1_%%D.rou.xml (limpios)
 REM ======================================================
@@ -16,10 +16,10 @@ set VEHICLE_TYPES=%INPUT_DIR%\vehicles.add.xml
 
 cd /d %PROJECT_ROOT%
 
-for %%D in (500 1000 2500 5000) do (
+for %%D in (83 250 500 830) do (
     echo.
     echo ============================
-    echo Generando rutas type 1 para densidad %%D...
+    echo Generando rutas type 1 para %%D vehiculos...
     echo ============================
 
     set "TRIP_FILE=!INPUT_DIR!\trips_type1_%%D.trips.xml"
