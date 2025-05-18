@@ -21,11 +21,11 @@ echo Semilla fija: %SEED%
 echo.
 
 REM Densidades reales usadas para simular magnitudes equivalentes a las nominales
-for %%D in (25 75 150 250) do (
-    if %%D==25  set NAME=1000
-    if %%D==75  set NAME=3000
-    if %%D==150  set NAME=6000
-    if %%D==250 set NAME=10000
+for %%D in (3 9 18 30) do (
+    if %%D==3  set NAME=1000
+    if %%D==9  set NAME=3000
+    if %%D==18 set NAME=6000
+    if %%D==30 set NAME=10000
 
     echo Generando trips_type2_!NAME!.trips.xml con densidad ajustada %%D veh/km2...
 
