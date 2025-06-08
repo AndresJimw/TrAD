@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 REM ============================================================
 REM GENERADOR DE ARCHIVOS .sumocfg PARA TYPE 2 (fuera del ROI)
-REM Densidades: 500, 1000, 2500, 5000 veh/km²
+REM Genera simon_bolivar_type2_%%D.sumocfg para cada escenario
 REM Entrada: routes_type2_%%D.rou.xml
 REM Salida: simon_bolivar_type2_%%D.sumocfg
 REM ============================================================
@@ -19,7 +19,7 @@ set ADDITIONAL_FILES=..\input\roi_simon_bolivar.add.xml,..\input\vehicles.add.xm
 
 cd /d %CONFIG_DIR%
 
-for %%D in (1000, 3000, 6000, 10000) do (
+for %%D in (1000 2000 3000 4000 5000 6000 7000 8000 9000 10000) do (
     set "SUMOCFG_FILE=simon_bolivar_type2_%%D.sumocfg"
     set "ROUTE_FILE=..\input\routes_type2_%%D.rou.xml"
 

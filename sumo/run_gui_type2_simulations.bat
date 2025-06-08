@@ -12,18 +12,30 @@ set CONFIG_DIR=%PROJECT_ROOT%\sumo\config
 
 echo Simulaciones disponibles para TYPE 2:
 echo -------------------------------------
-echo [1]  ~1000 vehiculos (densidad 25 veh/km²)
-echo [2]  ~3000 vehiculos (densidad 75 veh/km²)
-echo [3]  ~6000 vehiculos (densidad 150 veh/km²)
-echo [4]  ~10000 vehiculos (densidad 250 veh/km²)
+echo [1]  ~1000 vehiculos
+echo [2]  ~2000 vehiculos
+echo [3]  ~3000 vehiculos
+echo [4]  ~4000 vehiculos
+echo [5]  ~5000 vehiculos
+echo [6]  ~6000 vehiculos
+echo [7]  ~7000 vehiculos
+echo [8]  ~8000 vehiculos
+echo [9]  ~9000 vehiculos
+echo [10] ~10000 vehiculos
 echo.
 
-set /p OPTION=Selecciona una opcion (1-4): 
+set /p OPTION=Selecciona una opcion (1-10): 
 
 if "%OPTION%"=="1" set VEHICLES=1000
-if "%OPTION%"=="2" set VEHICLES=3000
-if "%OPTION%"=="3" set VEHICLES=6000
-if "%OPTION%"=="4" set VEHICLES=10000
+if "%OPTION%"=="2" set VEHICLES=2000
+if "%OPTION%"=="3" set VEHICLES=3000
+if "%OPTION%"=="4" set VEHICLES=4000
+if "%OPTION%"=="5" set VEHICLES=5000
+if "%OPTION%"=="6" set VEHICLES=6000
+if "%OPTION%"=="7" set VEHICLES=7000
+if "%OPTION%"=="8" set VEHICLES=8000
+if "%OPTION%"=="9" set VEHICLES=9000
+if "%OPTION%"=="10" set VEHICLES=10000
 
 if not defined VEHICLES (
     echo Opcion invalida. Cerrando...

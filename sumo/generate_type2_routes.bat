@@ -4,6 +4,7 @@ setlocal enabledelayedexpansion
 REM ==========================================
 REM GENERADOR DE RUTAS TYPE 2 SIN FILTRO ROI
 REM Genera .rou.xml directamente desde .trips
+REM AHORA CON 10 ESCENARIOS (1000–10000)
 REM ==========================================
 
 set PROJECT_ROOT=D:\TrAD-Quito
@@ -14,7 +15,7 @@ set VEHICLE_TYPES=%INPUT_DIR%\vehicles.add.xml
 
 cd /d %PROJECT_ROOT%
 
-for %%D in (1000, 3000, 6000, 10000) do (
+for %%D in (1000 2000 3000 4000 5000 6000 7000 8000 9000 10000) do (
     echo ============================
     echo Procesando densidad %%D...
     echo ============================

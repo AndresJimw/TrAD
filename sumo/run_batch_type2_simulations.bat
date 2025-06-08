@@ -13,7 +13,7 @@ set OUTPUT_DIR=%PROJECT_ROOT%\sumo\output
 set SUMO=sumo
 
 REM Números aproximados de vehículos en toda la red
-set VEHICLE_COUNTS=1000 3000 6000 10000
+set VEHICLE_COUNTS=1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
 
 cd /d %CONFIG_DIR%
 

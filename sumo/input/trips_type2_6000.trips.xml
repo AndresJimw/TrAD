@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2025-05-18 00:43:58.884151 by randomTrips.py 9a83456
+<!-- generated on 2025-06-08 01:26:46.746108 by randomTrips.py 9a83456
 <configuration>
     <net-file value="D:\TrAD-Quito\sumo\input\simon_bolivar.net.xml"/>
     <output-trip-file value="D:\TrAD-Quito\sumo\input\trips_type2_6000.trips.xml"/>
@@ -10,7 +10,7 @@
 </configuration>
 -->
 
-<!-- generated on 2025-05-18 00:43:52 by Eclipse SUMO duarouter Version 1.18.0
+<!-- generated on 2025-06-08 01:26:39 by Eclipse SUMO duarouter Version 1.18.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
 
     <input>
